@@ -4,6 +4,7 @@
 With the SDK you are scanning for so called blulocs. These are special beacons of the Favendo GmbH. This scanning can also be in the background, while your android application is not visible.
 
 Scanning those blulocs enables you to:
+
 1. receive enter and leave actions configured in your dashboard account
 2. use it offline and fully featured
 
@@ -13,6 +14,7 @@ It also sends an Analytics Event for each action that has been triggered by your
 The SDK allows full offline functionality. You need to set up the SDK once correctly within your application to allow it to download all neccessary data. Once done, it can be set up without an internect connection next time.
 
 There are two download strategies available:
+
 1. "All" - This is the default approach which will download all relevant data from the server.
 2. "Around Me" - With this approach every bluloc and all associated actions will be downloaded in a certain radius (1 km) around the current user location.
 
@@ -20,6 +22,7 @@ There are two download strategies available:
 In the zip file, which you can download, if you're having a valid dashboard account, you will find a demo application. That application shows how to set up the sdk-project.
 
 Here is a quick guide that tells you what to do:
+
 1. add the following lines to the "build.gradle"-file of your root project
 ```bash
 allprojects {
