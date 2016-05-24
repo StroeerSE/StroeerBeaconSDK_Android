@@ -23,7 +23,7 @@ In the zip file, which you can download, if you're having a valid dashboard acco
 
 Here is a quick guide that tells you what to do:
 
-1. add the following lines to the "build.gradle"-file of your root project
+First add the following lines to the "build.gradle"-file of your root project
 ```bash
 allprojects {
     repositories {
@@ -38,7 +38,7 @@ allprojects {
     }
 }
 ```
-2. add the following lines to the "build.gradle"-file of the app-module. Be aware that you might have to update the version numbers according to the aars you found in the demo-application.
+Then add the following lines to the "build.gradle"-file of the app-module. Be aware that you might have to update the version numbers according to the aars you found in the demo-application.
 ```bash
 dependencies {
     compile('de.stroeer:stroeerProxitySdk:1.6.x-StripDown@aar')
