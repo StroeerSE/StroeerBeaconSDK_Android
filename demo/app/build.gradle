@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.match2blue.blulocdemoapp"
+        minSdkVersion 18
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+repositories {
+    maven {
+        url 'http://maven.match2blue.com/nexus/content/repositories/StroeerGroup/'
+        credentials {
+            username 'StroeerUser'
+            password 'StroeerPW2016'
+        }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.3.0'
+   compile('de.stroeer:stroeerProxitySdk:1.6.21-StripDown@aar')
+            {
+                transitive = true
+            }
+}
