@@ -161,5 +161,37 @@ To use the AroundMe-Strategy, call the following:
 StroeerProxityApi.setDownloadStrategy(DownloadStrategy.AROUNDME)
 ```
 
+### Scan process
+#### Start Scanning
+
+The last step is to start scanning for nearby beacons:
+```bash
+MyApplication.getStroeerProxityApi().startScan();
+```
+
+The SDK now scans for beacons near you and its scanning property will be set to true. This way you can find out whether the SDK is currently scanning or not. Since the SDK is scanning for nearby beacons, you might get notifications from it fairly soon.
+
+#### Stop Scanning
+
+When you're done with scanning, you simply call:
+```bash
+MyApplication.getStroeerProxityApi().stopScan();
+```
+
+#### Scan Period
+
+It's possible to define a period of time which is used to collect raw beacon data before they will be analysed:
+```bash
+MyApplication.getStroeerProxityApi().setScanningPeriod(long timeInMillis);
+```
+The default value is five seconds. In this time the SDK will collect all scanned beacon informations in your vicinity. After this time span you get informed if there were any results, e.g. a received action.
+
+#### Update data
+
+At each time one of the setup methods is called the SDK will update the local data with the latest data on the server. If you want to update the data manually you can use this method:
+```bash
+MyApplication.getStroeerProxityApi().updateData();
+```
+
 ## Further Information
 For further informations the whole api is documented as JavaDoc. You can find this JavaDoc inside of the zip-file in folder documentation.
