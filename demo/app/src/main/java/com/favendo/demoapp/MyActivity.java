@@ -1,4 +1,4 @@
-package com.favendo.blulocdemoapp;
+package com.favendo.demoapp;
 
 import android.app.Activity;
 import android.os.Bundle;

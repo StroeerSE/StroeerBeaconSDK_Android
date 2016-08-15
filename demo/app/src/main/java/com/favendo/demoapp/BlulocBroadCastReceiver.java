@@ -1,4 +1,4 @@
-package com.match2blue.blulocdemoapp;
+package com.favendo.demoapp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
