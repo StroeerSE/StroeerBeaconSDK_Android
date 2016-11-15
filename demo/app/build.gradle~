@@ -5,9 +5,9 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.match2blue.blulocdemoapp"
-        minSdkVersion 19
-        targetSdkVersion 19
+        applicationId "com.favendo.blulocdemoapp"
+        minSdkVersion 18
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -19,14 +19,10 @@ android {
 }
 
 dependencies {
-    compile('com.android.support:appcompat-v7:23.3.0')
-            {
-                exclude group: "com.android.support", module: "support-v4"
-            }
-    compile('de.stroeer:stroeerProxitySdk:1.8.0-Stroeer@aar')
-            {
-                transitive = true
-            }
+    compile('de.stroeer:stroeerProxitySdk:1.10.0@aar') {
+        transitive = true
+	exclude group: "com.android.support", module: "support-v4"
+    }
 }
 
 
