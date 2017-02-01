@@ -7,17 +7,17 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import de.stroeer.model.Beacon;
 import de.stroeer.proxity.StroeerProxityApi;
-import de.stroeer.proxity.gateway.Dependencies;
 import de.stroeer.proxity.gateway.Gateway;
 import de.stroeer.proxity.gateway.Message;
 import de.stroeer.proxity.gateway.ResponseCode;
-import de.stroeer.proxity.model.Beacon;
+import de.stroeer.proxity.gateway.Dependencies;
 
 
 public class MyActivity extends Activity implements Gateway.IGatewayListener {
 
-    public static final String API_KEY = ">>>Type Api-Key here<<<";
+    public static final String API_KEY = "Type Api-Key here";
 
     private TextView debugView;
 
@@ -27,10 +27,20 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
         setContentView(R.layout.activity_my);
         this.debugView = (TextView) findViewById(R.id.debugView);
 
+        //Defines the ApiKey used by the sdk
         StroeerProxityApi.getInstance(this).setApiKey(API_KEY);
-        StroeerProxityApi.getInstance(this).startScan();
 
-        this.enableFileLogging();
+        //Define a custom advertisingID
+        StroeerProxityApi.getInstance(this).setCustomAdvertisingId("Type Custom Advertising Id here");
+
+        //The Sdk will add the google advertisingId to each Analytics Event
+        StroeerProxityApi.getInstance(this).addSystemAdvertisingId(true);
+
+        //Set Path for log-file
+        String path = Environment.getExternalStorageDirectory().getPath() + "/";
+        StroeerProxityApi.getInstance(this).setLogFile(new File(path + "logfile.txt"));
+
+        StroeerProxityApi.getInstance(this).startScan();
     }
 
     @Override
@@ -57,7 +67,7 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
         }
 
         if (message.getCode() == ResponseCode.INFO_LEFT_BEACON_REGION) {
-            Beacon left = (Beacon) message.getData();
+            Beacon leftBeacon = (Beacon) message.getData();
         }
     }
 
@@ -71,10 +81,5 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
         if (deliverdForFirstTime) {
             this.debugView.setText(this.debugView.getText() + status.toString() + " revoked\n");
         }
-    }
-
-    private void enableFileLogging() {
-        String path = Environment.getExternalStorageDirectory().getPath() + "/";
-        StroeerProxityApi.getInstance(this).setLogFile(new File(path + "logfile.txt"));
     }
 }

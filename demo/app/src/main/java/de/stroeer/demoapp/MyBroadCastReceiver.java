@@ -7,8 +7,8 @@ import android.util.Log;
 
 import de.stroeer.proxity.gateway.Message;
 import de.stroeer.proxity.gateway.MessageIntent;
-import de.stroeer.proxity.gateway.Dependencies;
 import de.stroeer.proxity.gateway.StatusIntent;
+import de.stroeer.proxity.gateway.Dependencies;
 
 /**
  * Created by mfriedl on 16.10.2014.

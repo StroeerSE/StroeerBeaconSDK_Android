@@ -7,8 +7,6 @@ Scanning those beacons enables you to use it offline and fully featured.
 
 The SDK allows full offline functionality. You need to set up the SDK once correctly within your application to allow downloading all necessary data. Once done, it can be set up without an internet connection next time.
 
-The download strategy is "Around Me" - With this approach every beacon will be downloaded in a certain radius around the current user location.
-
 ## Integrate the SDK into a project
 In the GitHub you will find a demo application. That application shows how to set up the sdk-project.
 
@@ -40,6 +38,12 @@ dependencies {
 ```
 
 ## Usage
+### Android 6+ changes
+
+Since Android 6, it is neccessary to have Location Permission set for the app. In order to do this, the sdk user has to integrate an dialog which asks for this permission. See https://developer.android.com/training/permissions/requesting.html
+
+Also the Location service has to be enabled in the android settings! Otherwise it is not possible to scan for beacons.
+
 ### Prerequisites
 To use the whole functionality of the SDK, it is necessary to declare some permissions. This is already done by the sdks own Android-Manifest:
 #### Predefined hardware feature by sdk
@@ -147,6 +151,28 @@ It's possible to define the leave duration, which determines how long a beacon s
 StroeerProxityApi.getInstance(this).setLeaveDuration(long timeInMillis);
 ```
 The default value is 30 seconds.
+
+### Advertising Identifier
+
+The Ströer Proxity SDK provides two ways to set an advertising identifier to identify a user across different apps in order to show targeted advertisements.
+The first on is to define a custom advertising id which can be every string.
+The second way is to let the sdk use the google advertising id.
+
+Please consider google's advertising policy:
+
+https://play.google.com/about/monetization-ads/ads/disruptive/
+
+#### custom advertising id
+```bash
+StroeerProxityApi.getInstance(this).setCustomAdvertisingId("custom advertising Id")
+```
+Use this setter to specify your own advertising identifier.
+
+##### system advertising id (google advertising id)
+```bash
+StroeerProxityApi.getInstance(this).addSystemAdvertisingId(true)
+```
+Use this method to specify that the sdk should append the google advertising id to each analytics-event
 
 #### DebugMode
 
