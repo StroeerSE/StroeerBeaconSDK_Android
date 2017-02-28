@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    compile('de.stroeer:stroeerProxitySdk:2.0.3@aar') {
+    compile('de.stroeer:stroeerProxitySdk:2.0.0@aar') {
         transitive = true
     }
 }
