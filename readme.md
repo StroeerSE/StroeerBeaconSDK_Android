@@ -1,15 +1,15 @@
-# Ströer Proxity Sdk
+# Ströer Proxity SDK
 
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:1 -->
 
-1. [Purpose of the Sdk](#purpose-of-the-sdk)
+1. [Purpose of the SDK](#purpose-of-the-sdk)
 2. [Build demo-project](#build-demo-project)
-3. [Integrate the Sdk into a project](#integrate-the-sdk-into-a-project)
+3. [Integrate the SDK into a project](#integrate-the-sdk-into-a-project)
 4. [Usage](#usage)
 	1. [Android 6+ changes](#android-6-changes)
 	2. [Prerequisites](#prerequisites)
-		1. [Predefined hardware feature by Sdk](#predefined-hardware-feature-by-sdk)
-		2. [Predefined permissions by Sdk](#predefined-permissions-by-sdk)
+		1. [Predefined hardware feature by SDK](#predefined-hardware-feature-by-sdk)
+		2. [Predefined permissions by SDK](#predefined-permissions-by-sdk)
 		3. [Optional permissions defined by app](#optional-permissions-defined-by-app)
 	3. [Main Classes](#main-classes)
 	4. [Scan process](#scan-process)
@@ -24,16 +24,12 @@
 
 <!-- /TOC -->
 
-## Purpose of the Sdk
-With the Sdk you are scanning for so called beacons, whether the host-application
-is in background or foreground.
+## Purpose of the SDK
+With this SDK your mobile app will be capable of scanning so called "beacons". A beacon is a small piece of hardware that enables the detection of user-location information by using Bluetooth technology.
 
-Scanning those beacons enables you to use it offline and fully featured.
+The SDK is capable of detecting beacons  whether the host-application is in background or foreground. Scanning is also active while your app has no online-connection. All beacon analytics-events are gathered while offline and will be sent to our back-end as soon as the online connectivity is recovered.
 
-The Sdk allows full offline functionality. You need to set up the Sdk once correctly within your application to allow downloading all necessary data. Once done, it can be set up without an internet connection next time.
-
-All gathered analytics-events while offline will be sent as soon as the device has a valid internet connection again.
-
+After setting up the SDK correctly within you application for the first time all necessary data will be downloaded.
 
 > Due to the use of Bluetooth low energy the minimum Android version is 4.3 Jelly Bean (API 18).
 
@@ -41,8 +37,8 @@ All gathered analytics-events while offline will be sent as soon as the device h
 
 To build the demo-project please call ./gradlew.sh on unix systems or gradlew.bat on windows systems.
 
-## Integrate the Sdk into a project
-In the GitHub you will find a demo application. That application shows how to set up the Sdk-project.
+## Integrate the SDK into a project
+In the GitHub you will find a demo application. That application shows how to set up the SDK-project.
 
 Here is a quick guide that tells you what to do:
 
@@ -64,7 +60,7 @@ allprojects {
 Then add the following lines to the "build.gradle"-file of the app-module. Be aware that you might have to update the version numbers according to the aars you found in the demo-application.
 ```bash
 dependencies {
-    compile('de.stroeer:stroeerProxitySdk:x.y.z-Stroeer@aar')
+    compile('de.stroeer:stroeerProxitySDK:x.y.z-Stroeer@aar')
         {
             transitive = true
         }
@@ -74,18 +70,18 @@ dependencies {
 ## Usage
 ### Android 6+ changes
 
-Since Android 6, it is necessary to have Location Permission set for the app. In order to do this, the Sdk user has to integrate an dialog which asks for this permission. See https://developer.android.com/training/permissions/requesting.html
+Since Android 6, it is necessary to have Location Permission set for the app. In order to do this, the SDK user has to integrate an dialog which asks for this permission. See https://developer.android.com/training/permissions/requesting.html
 
 Also the Location service has to be enabled in the android settings! Otherwise it is not possible to scan for beacons.
 
 ### Prerequisites
-To use the whole functionality of the Sdk, it is necessary to declare some permissions. This is already done by the Sdks own Android-Manifest:
-#### Predefined hardware feature by Sdk
-As the Sdk needs to make extensive use of the bluetooth-feature, it is necessary to set it as prerequisite for your app to function.
+To use the whole functionality of the SDK, it is necessary to declare some permissions. This is already done by the SDKs own Android-Manifest:
+#### Predefined hardware feature by SDK
+As the SDK needs to make extensive use of the bluetooth-feature, it is necessary to set it as prerequisite for your app to function.
 ```xml
 <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 ```
-#### Predefined permissions by Sdk
+#### Predefined permissions by SDK
 To start and stop scanning for bluetooth low energy devices:
 ```xml
 <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -98,7 +94,7 @@ To download beacon data from the backend:
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
-The Sdk features automatic data-update after the internet connection got lost and than reconnects. To recognize those changes the following permissions are needed:
+The SDK features automatic data-update after the internet connection got lost and than reconnects. To recognize those changes the following permissions are needed:
 ```xml
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
@@ -106,12 +102,12 @@ Since Android 6.0 it is necessary to have Location Permission in order to scan f
 ```xml
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 ```
-The Sdk is also able to get an outdoor-position in the background. The fact, that the processor of the smartphone will "sleep" after a certain time, makes the following permission needed to wake it up.
+The SDK is also able to get an outdoor-position in the background. The fact, that the processor of the smartphone will "sleep" after a certain time, makes the following permission needed to wake it up.
 ```xml
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 #### Optional permissions defined by app
-If you like to log all Sdk-events into a log file, you have to specify this dependency and call the `setLogFile` method on the `StroeerProxityApi`.
+If you like to log all SDK-events into a log file, you have to specify this dependency and call the `setLogFile` method on the `StroeerProxityApi`.
 ```xml
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
@@ -119,8 +115,8 @@ If you like to log all Sdk-events into a log file, you have to specify this depe
 ### Main Classes
 As you can see in the demo-project which is delivered, the important classes are `StroeerProxityApi` and `Gateway.IGatewayListener`.
 
-`StroeerProxityApi` gives access to all functionality and settings of the StroeerProxitySdk.
-The purpose of `Gateway.IGateWayListener` is to inform you about every event and change in status which is done inside of the StroeerProxitySdk.
+`StroeerProxityApi` gives access to all functionality and settings of the StroeerProxitySDK.
+The purpose of `Gateway.IGateWayListener` is to inform you about every event and change in status which is done inside of the StroeerProxitySDK.
 After you have get an instance of `StroeerProxityApi` you have to register an instance of `Gateway.IGateWayListener` with the usage of the `registerGatewayListener` method.
 Call `resendCurrentState` after this (See explanation below the code)
 ```java
@@ -150,7 +146,7 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
     }
 
     /**
-     * This method is called whenever the Sdk has to inform you about new messages
+     * This method is called whenever the SDK has to inform you about new messages
      *
      * @param message:              the actual message with descripion, code and data which is new
      * @param deliverdForFirstTime: determines if this message was sent for the first time (true) or it is a copy (false). This is neccessary for reseting the app if its gone to background and was brought to the front again.
@@ -184,7 +180,7 @@ The last step is to start scanning for nearby beacons:
 StroeerProxityApi.getInstance(this).startScan();
 ```
 
-Now the Sdk scans for beacons near you and its scanning property will be set to true. This way you can find out whether the Sdk is currently scanning or not. Since the Sdk is scanning for nearby beacons, you might get notifications from it fairly soon.
+Now the SDK scans for beacons near you and its scanning property will be set to true. This way you can find out whether the SDK is currently scanning or not. Since the SDK is scanning for nearby beacons, you might get notifications from it fairly soon.
 
 #### Stop Scanning
 
@@ -203,9 +199,9 @@ The default value is 30 seconds.
 
 ### Advertising Identifier
 
-The Ströer Proxity Sdk provides two ways to set an advertising identifier to identify a user across different apps in order to show targeted advertisements.
+The Ströer Proxity SDK provides two ways to set an advertising identifier to identify a user across different apps in order to show targeted advertisements.
 The first on is to define a custom advertising id which can be every string.
-The second way is to let the Sdk use the Google advertising id.
+The second way is to let the SDK use the Google advertising id.
 
 Please consider Google's advertising policy:
 
@@ -221,7 +217,7 @@ Use this setter to specify your own advertising identifier.
 ```java
 StroeerProxityApi.getInstance(this).addSystemAdvertisingId(true)
 ```
-Use this method to specify that the Sdk should append the Google advertising id to each analytics-event
+Use this method to specify that the SDK should append the Google advertising id to each analytics-event
 
 ### DebugMode
 
