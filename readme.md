@@ -17,8 +17,8 @@
 		2. [Stop Scanning](#stop-scanning)
 		3. [Leave Duration](#leave-duration)
 	5. [Advertising Identifier](#advertising-identifier)
-		1. [custom advertising id](#custom-advertising-id)
-		2. [system advertising id (Google advertising id)](#system-advertising-id-google-advertising-id)
+		1. [custom advertising ID](#custom-advertising-id)
+		2. [system advertising ID (Google advertising ID)](#system-advertising-id-google-advertising-id)
 	6. [DebugMode](#debugmode)
 5. [Further Information](#further-information)
 
@@ -199,13 +199,13 @@ The Ströer Proxity SDK provides two ways to set an advertising identifier in or
 > **NOTE:** By default the SDK tries to fetch the advertising ID. According to the Google advertising policy the SDK will not read the advertising ID if the user has enabled `Limit Ad Tracking`.
 **Please consider Google's advertising policy:** https://play.google.com/about/monetization-ads/ads/disruptive/
 
-#### system advertising id (Google advertising id)
+#### system advertising ID (Google advertising ID)
 ```java
 StroeerProxityApi.getInstance(this).addSystemAdvertisingId(true)
 ```
-Use this method to specify that the SDK should append the Google advertising id to each analytics-event
+Use this method to specify that the SDK should append the Google advertising ID to each analytics-event. If you do not want the SDK to read the advertising ID, you have to set it to `false`.
 
-#### custom advertising id
+#### custom advertising ID
 ```java
 StroeerProxityApi.getInstance(this).setCustomAdvertisingId("custom advertising Id")
 ```
