@@ -77,7 +77,7 @@ Also the location-service has to be enabled in the android settings! Otherwise i
 
 To use the whole functionality of the SDK, it is necessary to declare certain permissions. This is already done by the SDKs own Android-Manifest:
 #### Predefined hardware feature by SDK
-As the SDK needs to make extensive use of the Bluetooth-feature, it is necessary to set it as prerequisite for your app to function.
+The SDK makes extensive use of the Bluetooth-feature. Therefore it is necessary to set the following feature as prerequisite for your app to function.
 ```xml
 <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 ```
