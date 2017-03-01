@@ -196,7 +196,7 @@ The Ströer Proxity SDK provides two ways to set an advertising identifier in or
 1. Use the Google advertising ID.
 2. Define a custom advertising ID which is a custom string.
 
-> **NOTE:** By default the SDK tries to fetch the advertising ID. According to the Google advertising policy the SDK will not read the advertising ID if the user has enabled `Limit Ad Tracking`.
+> **NOTE:** By default the SDK tries to fetch the system advertising ID. According to the Google advertising policy the SDK will not read the advertising ID if the user has enabled `Limit Ad Tracking`.
 **Please consider Google's advertising policy:** https://play.google.com/about/monetization-ads/ads/disruptive/
 
 #### system advertising ID (Google advertising ID)
