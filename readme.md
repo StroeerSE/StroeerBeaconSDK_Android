@@ -11,14 +11,13 @@
 		1. [Predefined hardware feature by SDK](#predefined-hardware-feature-by-sdk)
 		2. [Predefined permissions by SDK](#predefined-permissions-by-sdk)
 		3. [Optional permissions defined by app](#optional-permissions-defined-by-app)
-	3. [Main Classes](#main-classes)
-	4. [Scan process](#scan-process)
-		1. [Start Scanning](#start-scanning)
+	3. [Step 1: Setup Main Classes](#step-1:-setup-main-classes)
+	4. [Step 2: Scan Process and Advanced Setup](#step-2:-scan-process-and-advanced-setup)
+		1. [Advanced Setup](#advanced-setup)
 		2. [Stop Scanning](#stop-scanning)
-		3. [Leave Duration](#leave-duration)
 	5. [Advertising Identifier](#advertising-identifier)
-		1. [custom advertising ID](#custom-advertising-id)
-		2. [system advertising ID (Google advertising ID)](#system-advertising-id-google-advertising-id)
+	   	1. [Google Advertising ID](#google-advertising-id)
+		2. [Custom Advertising ID](#custom-advertising-id)
 	6. [DebugMode](#debugmode)
 5. [Further Information](#further-information)
 
@@ -114,7 +113,7 @@ If you like to log all SDK-events into a log file, you must specify this depende
 
 > This permission is also used in the demo-project.
 
-### Main Classes
+### Step 1: Setup Main Classes
 As you can see in the demo-project, the important classes are `StroeerProxityApi` and `Gateway.IGatewayListener`.
 
 `StroeerProxityApi` gives access to all functionality and settings of the StroeerProxitySDK.
@@ -129,8 +128,14 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        // set the API key
         StroeerProxityApi.getInstance(this).setApiKey(API_KEY);
+        
+        // do advanced stuff (explainded in Step 2)
+        ...
+        
+        // start the scanning process 
         StroeerProxityApi.getInstance(this).startScan();
     }
 
@@ -174,15 +179,22 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
 ```
 > Because the background-service might be running without an activity you have to call **`resendCurrentState()`** to restore the current state of the service and to update your GUI if necessary.
 
-### Scan process
-#### Start Scanning
+### Step2: Scan Process and Advanced Setup
+#### Advanced Setup
 
-The last step is to start scanning for nearby beacons:
+The before you start the scanning you might set the Advertising ID handling.
 ```java
+// The SDK will add the Google Advertising ID
+StroeerProxityApi.getInstance(this).addSystemAdvertisingId(false)
+
+// Defined a custom advertising ID
+StroeerProxityApi.getInstance(this).setCustomAdvertisingId("Your Custom Advertising ID");
+
+// Now start scanning
 StroeerProxityApi.getInstance(this).startScan();
 ```
 
-Now the SDK is scanning for beacons in an area of [...TODO...] and its scanning property will be set to true. This way you can find out whether the SDK is currently scanning or not. Since the SDK is scanning for nearby beacons, you might get notifications from it immediately.
+Now the SDK is scanning for beacons in a radius of approximately 50 meters and its scanning property will be set to true. This way you can find out whether the SDK is currently scanning or not. Since the SDK is scanning for nearby beacons, you might get notifications from it immediately.
 
 #### Stop Scanning
 When you're done with scanning, you simply call:
@@ -193,23 +205,27 @@ StroeerProxityApi.getInstance(this).stopScan();
 ### Advertising Identifier
 The Ströer Proxity SDK provides two ways to set an advertising identifier in order to identify a user across different apps and show targeted advertisements.
 
-1. Use the Google advertising ID.
+1. Use the Google Advertising ID.
 2. Define a custom advertising ID which is a custom string.
 
 > **NOTE:** By default the SDK tries to fetch the system advertising ID. According to the Google advertising policy the SDK will not read the advertising ID if the user has enabled `Limit Ad Tracking` on his device.
 **Please consider Google's advertising policy:** https://play.google.com/about/monetization-ads/ads/disruptive/
 
-#### system advertising ID (Google advertising ID)
+#### Google Advertising ID
+Use this method to specify that the SDK should append the Google advertising ID to each analytics-event. If you do not want the SDK to read the advertising ID, you have to set it to `false`.
+
+Setter posts a message with via IGatewayListener in case of a failure with the response code `FAILURE_ADD_SYSTEM_ADVERISING_ID`. This will happen if you want to enable the feature and limit-ad-tracking is enabled on the user's device.
+
 ```java
 StroeerProxityApi.getInstance(this).addSystemAdvertisingId(true)
 ```
-Use this method to specify that the SDK should append the Google advertising ID to each analytics-event. If you do not want the SDK to read the advertising ID, you have to set it to `false`.
 
-#### custom advertising ID
+
+#### Custom Advertising ID
+Use this setter to specify your own advertising identifier.
 ```java
 StroeerProxityApi.getInstance(this).setCustomAdvertisingId("custom advertising Id")
 ```
-Use this setter to specify your own advertising identifier.
 
 ### DebugMode
 If you want to get some debug-information e.g. which beacons got scanned, you have to process the messages received by `Gateway.IGatewayListener.onMessage`. For more information have a look at the JavaDoc -> `ResponseCode`. Also, there is an option to create a logfile. An example of how to use this function can be found in the JavaDoc.
