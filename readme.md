@@ -11,8 +11,8 @@
 		1. [Predefined hardware feature by SDK](#predefined-hardware-feature-by-sdk)
 		2. [Predefined permissions by SDK](#predefined-permissions-by-sdk)
 		3. [Optional permissions defined by app](#optional-permissions-defined-by-app)
-	3. [Step 1: Setup Main Classes](#step-1:-setup-main-classes)
-	4. [Step 2: Scan Process and Advanced Setup](#step-2:-scan-process-and-advanced-setup)
+	3. [Step 1: Setup Main Classes](#step-1-setup-main-classes)
+	4. [Step 2: Scan Process and Advanced Setup](#step-2-scan-process-and-advanced-setup)
 		1. [Advanced Setup](#advanced-setup)
 		2. [Stop Scanning](#stop-scanning)
 	5. [Advertising Identifier](#advertising-identifier)
@@ -179,7 +179,7 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
 ```
 > Because the background-service might be running without an activity you have to call **`resendCurrentState()`** to restore the current state of the service and to update your GUI if necessary.
 
-### Step2: Scan Process and Advanced Setup
+### Step 2: Scan Process and Advanced Setup
 #### Advanced Setup
 
 The before you start the scanning you might set the Advertising ID handling.
