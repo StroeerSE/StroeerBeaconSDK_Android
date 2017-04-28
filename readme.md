@@ -64,6 +64,8 @@ dependencies {
 }
 ```
 
+current version is 2.0.7
+
 ## Usage
 ### Android 6+ changes
 
