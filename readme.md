@@ -67,6 +67,10 @@ dependencies {
 current version is 2.0.7
 
 ## Usage
+### Minimum Android Api Version
+
+SDK: The minimum Android Api Version is 14. But beacons will just be scanned with Android Api Version 18. It's because version 18 is the first version which supports bluetooth low energy.
+
 ### Android 6+ changes
 
 Since Android 6, it is necessary to have location-permission set for the app. In order to do this, the SDK user has to integrate a dialog which asks for this permission. See https://developer.android.com/training/permissions/requesting.html
