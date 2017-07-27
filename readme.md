@@ -26,7 +26,7 @@
 ## Purpose of the SDK
 With this SDK your mobile app will be capable of scanning so called "beacons". A beacon is a small piece of hardware that enables the detection of user-location information by using Bluetooth technology.
 
-The SDK is capable of detecting beacons  whether the host-application is in background or foreground. Scanning is also active while your app has no online-connection. All beacon analytics-events are gathered while offline and will be sent to our back-end as soon as the online connectivity is recovered.
+The SDK is capable of detecting beacons regardless whether the host-application is in background or foreground. Scanning is also active while your app has no internet-connection, provided that the API-Key has been verified at least once. All beacon analytics-events are gathered while offline and will be sent to our back-end as soon as the online connectivity is recovered.
 
 After setting up the SDK correctly within you application for the first time all necessary data will be downloaded.
 
@@ -69,7 +69,7 @@ current version is 2.1.2
 ## Usage
 ### Minimum Android Api Version
 
-SDK: The minimum Android Api Version is 14. But beacons will just be scanned with Android Api Version 18. It's because version 18 is the first version which supports bluetooth low energy.
+SDK: The minimum Android Api Version is 14. However, beacons will only be scanned with Android Api version 18 and higher. This is because Api version 18 is the first version which supports bluetooth low energy.
 
 ### Android 6+ changes
 
@@ -99,7 +99,7 @@ To download beacon data from the backend:
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
-The SDK features automatic data-update after the internet connection got lost and than reconnects. To recognize those changes the following permissions are needed:
+The SDK features automatic data-update after the internet connection got lost and then reconnects. To recognize those changes the following permissions are needed:
 ```xml
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
@@ -138,7 +138,7 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
         // set the API key
         StroeerProxityApi.getInstance(this).setApiKey(API_KEY);
         
-        // do advanced stuff (explainded in Step 2)
+        // do advanced stuff (explained in Step 2)
         ...
         
         // start the scanning process 
