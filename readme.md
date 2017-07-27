@@ -57,7 +57,7 @@ allprojects {
 Then add the following lines to the "build.gradle"-file of the app-module. Be aware that you might have to update the version numbers according to the aars you found in the demo-application.
 ```bash
 dependencies {
-    compile('de.stroeer:stroeerProxitySDK:x.y.z-Stroeer@aar')
+    compile('de.stroeer:stroeerProxitySdk:x.y.z@aar')
         {
             transitive = true
         }
