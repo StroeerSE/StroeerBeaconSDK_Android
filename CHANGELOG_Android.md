@@ -5,7 +5,6 @@ This file lists all notable changes to the Stroeer Android SPX-SDK.
 ## Table of versions
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 -->
 
-* [Unreleased](#unreleased)
 * [2.2.1](#221)
 * [2.2.0](#220)
 * [2.1.2](#212)
@@ -15,15 +14,6 @@ This file lists all notable changes to the Stroeer Android SPX-SDK.
 * [1.10.0](#1100)
 
 <!-- /TOC -->
-
-## Unrealeased
-### Changed
-- Changed the message sent from the SDK when turning bluetooth off.
-
-### Fixed
-- Fixed an issue which caused the energy save mode not to function properly.
-- Fixed an issue caused by turning off bluetooth on certain smartphones.
-- Fixed an issue with expired API key validations which may have caused scans not to start when internet is turned off.
 
 
 ## 2.2.1
