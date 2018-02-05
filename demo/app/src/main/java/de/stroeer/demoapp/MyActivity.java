@@ -1,23 +1,35 @@
 package de.stroeer.demoapp;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
 import java.io.File;
 
 import de.stroeer.model.Beacon;
 import de.stroeer.proxity.StroeerProxityApi;
+import de.stroeer.proxity.gateway.Dependencies;
 import de.stroeer.proxity.gateway.Gateway;
 import de.stroeer.proxity.gateway.Message;
 import de.stroeer.proxity.gateway.ResponseCode;
-import de.stroeer.proxity.gateway.Dependencies;
 
-
+/**
+ * This is the MainActivity which will be shown after the app started
+ */
 public class MyActivity extends Activity implements Gateway.IGatewayListener {
 
-    public static final String API_KEY = "Type Api-Key here";
+    /*
+     * Defines a constant for the Api-Key which will grant access to the Server
+     */
+    public static final String API_KEY = "type api-key here";
+
+    private final int LOCATION_PERMISSION_REQUEST = 1;
 
     // A simple TextView which will show all given messages to the user
     private TextView debugView;
@@ -54,7 +66,14 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
         //Set Path of the log-file
         StroeerProxityApi.getInstance(this).setLogFile(new File(path + "logfile.txt"));
 
-        //Start scan for beacons
+        //Ask for location permission for the app, if they were not already granted. Location permission is required to scan beacons.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST);
+            }
+        }
+
+        //start scanning for beacons
         StroeerProxityApi.getInstance(this).startScan();
     }
 
@@ -94,8 +113,8 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
     /**
      * This method is called whenever the sdk has to inform you about new messages
      *
-     * @param message:              the actual message with descripion, code and data which is new
-     * @param deliverdForFirstTime: determines if this message was sent for the first time (true) or it is a copy (false). This is neccessary for reseting the app if its gone to background and was brought to the front again.
+     * @param message:              the actual message with description, code and data which is new
+     * @param deliverdForFirstTime: determines whether this message was sent for the first time (true) or it is a copy (false). This is necessary for resetting the app if its gone to background and was brought to the front again.
      */
     @Override
     public void onMessage(Message message, boolean deliverdForFirstTime) {
@@ -127,7 +146,7 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
      * is called whenever a new status was gained. Look inside of Dependencies class to inform you about the possible statuses
      *
      * @param status:               the actual status which was gained
-     * @param deliverdForFirstTime: determines if this message was sent for the first time (true) or it is a copy (false). This is neccessary for reseting the app if its gone to background and was brought to the front again.
+     * @param deliverdForFirstTime: determines if this message was sent for the first time (true) or it is a copy (false). This is necessary for resetting the app if its gone to background and was brought to the front again.
      */
     @Override
     public void onStatusGained(Dependencies status, boolean deliverdForFirstTime) {
@@ -139,7 +158,7 @@ public class MyActivity extends Activity implements Gateway.IGatewayListener {
      * is called whenever a status was revoked. Look inside of Dependencies class to inform you about the possible statuses
      *
      * @param status:               the actual status which was revoked
-     * @param deliverdForFirstTime: determines if this message was sent for the first time (true) or it is a copy (false). This is neccessary for reseting the app if its gone to background and was brought to the front again.
+     * @param deliverdForFirstTime: determines if this message was sent for the first time (true) or it is a copy (false). This is necessary for resetting the app if its gone to background and was brought to the front again.
      */
     @Override
     public void onStatusRevoked(Dependencies status, boolean deliverdForFirstTime) {

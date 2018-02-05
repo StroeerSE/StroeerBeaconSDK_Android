@@ -5,6 +5,7 @@ This file lists all notable changes to the Stroeer Android SPX-SDK.
 ## Table of versions
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 -->
 
+* [2.2.4](#224)
 * [2.2.1](#221)
 * [2.2.0](#220)
 * [2.1.2](#212)
@@ -14,6 +15,24 @@ This file lists all notable changes to the Stroeer Android SPX-SDK.
 * [1.10.0](#1100)
 
 <!-- /TOC -->
+
+# 2.2.4
+released ...
+### Changed
+- Improved the message sent from the SDK when turning bluetooth off.
+- In case a smartphone only has an accelerometer for motion detection: if the sensor malfunctions, the scan will not be paused anymore. Once the sensor works again, the scan runs in energy save mode again.
+- In case that Google Play Services are inoperative/disabled on a device, the Android Advertising ID won't be added to the analytics.
+
+### Fixed
+- Fixed a crash regarding binding background services.
+- Fixed a crash when trying to send analytics on a device on which Google Play Services are inoperative/disabled.
+- Fixed crashes with devices using Android versions below 4.3.
+
+- Fixed an issue which caused the energy save mode not to function properly.
+- Fixed an issue which caused beacons to be not re-entered by turning off and on bluetooth on certain smartphones.
+- Fixed an issue with expired API-key validations which may have triggered unnecessary API-key validations, hindering the SDK from starting the scan when internet is turned off.
+- Fixed decryption keys sometimes not being downloaded due to missing internet connection when starting the scan.
+- Fixed analytics having wrong beacon enter times after bluetooth was turned on.
 
 
 # 2.2.1

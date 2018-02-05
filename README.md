@@ -64,7 +64,7 @@ dependencies {
 }
 ```
 
-current version is 2.2.1
+current version is 2.2.4
 
 ## Usage
 ### Minimum Android Api Version
