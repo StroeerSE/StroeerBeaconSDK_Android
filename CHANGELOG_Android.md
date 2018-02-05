@@ -17,7 +17,7 @@ This file lists all notable changes to the Stroeer Android SPX-SDK.
 <!-- /TOC -->
 
 # 2.2.4
-released ...
+released Feb 05, 2018
 ### Changed
 - Improved the message sent from the SDK when turning bluetooth off.
 - In case a smartphone only has an accelerometer for motion detection: if the sensor malfunctions, the scan will not be paused anymore. Once the sensor works again, the scan runs in energy save mode again.
